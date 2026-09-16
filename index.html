@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="A comparison of four commercial depth sensors on porcine tissue and a silicone phantom for medical applications.">
+  <title>Comparing Commercial Depth Sensor Accuracy for Medical Applications</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%233b3b3b'/%3E%3Ccircle cx='10' cy='17' r='3' fill='%231f9d91'/%3E%3Ccircle cx='16' cy='11' r='2' fill='%23fff'/%3E%3Ccircle cx='22' cy='20' r='4' fill='%23a9ded9'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main>
+    <header class="paper-header">
+      <h1>Comparing Commercial Depth Sensor Accuracy for Medical Applications</h1>
+
+      <p class="authors">
+        <span>Pit Henrich</span>,
+        <span>Maximilian Weiherer</span>,
+        <span>Franziska Hansen</span>,
+        <span>Bernhard Egger</span>,
+        <span>Franziska Mathis-Ullrich</span>
+      </p>
+
+      <p class="affiliation">Friedrich-Alexander-Universität Erlangen-Nürnberg</p>
+      <p class="venue">CURAC 2026</p>
+
+      <nav class="links" aria-label="Paper resources">
+        <a href="https://arxiv.org/abs/2606.13028" aria-label="Paper on arXiv"><span aria-hidden="true">▤</span> Paper</a>
+        <a href="https://arxiv.org/pdf/2606.13028" aria-label="Download PDF"><span aria-hidden="true">↓</span> PDF</a>
+        <a href="https://github.com/somefoo/schweinebauch"
+        aria-label="Download dataset">
+        <span aria-hidden="true">▦</span> Data
+        </a>
+      </nav>
+    </header>
+
+    <figure class="sensor-strip">
+      <img src="assets/depth-sensors.png" alt="The Intel RealSense D405, PMD Flexx2, Stereolabs ZED 2i, and Zivid 2M+ 60 depth sensors." width="3562" height="573">
+      <figcaption>Evaluated depth sensors: RealSense D405, PMD Flexx2, Stereolabs ZED 2i, and Zivid 2M+ 60.</figcaption>
+    </figure>
+
+    <section>
+      <h2>Abstract</h2>
+      <p>
+        Depth estimation has numerous medical and surgical applications. We benchmark four depth sensors on a porcine bone specimen, a porcine belly specimen, and a silicone kidney phantom using stylus-sampled references. These objects contain several real-world challenges, including homogeneous surfaces, specular surfaces, and subsurface scattering. The comparison includes stereo, structured-light, and time-of-flight sensors at a distance of approximately 50 cm. The Zivid 2M+ 60 performed best across all objects and metrics considered in this work. The ZED ranked second for real tissue, but last on the phantom.
+      </p>
+    </section>
+
+    <figure class="teaser">
+      <img src="assets/point-cloud-overview.png" alt="Colored and structure-only point clouds of a porcine belly captured by the D405, Flexx, ZED, and Zivid depth sensors." width="2007" height="1599">
+      <figcaption>Examples of point clouds captured by the evaluated commercial depth sensors. From left to right: RealSense D405, PMD Flexx2, Stereolabs ZED 2i, and Zivid 2M+ 60.</figcaption>
+    </figure>
+
+    <section>
+      <h2>Results</h2>
+      <p>
+        Zivid achieved the lowest mean error on every object. ZED was similarly accurate on bone and porcine belly, but its error increased on the dark, homogeneous phantom. Moving the D405 from 50 cm to 33 cm reduced its porcine-belly error from 5.45 mm to 3.28 mm.
+      </p>
+
+      <div class="table-wrap">
+        <table>
+          <caption>Mean point error in millimetres. Lower is better.</caption>
+          <thead>
+            <tr><th>Sensor</th><th>Bone</th><th>Porcine belly</th><th>Phantom</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>RealSense D405</td><td>7.11</td><td>5.45</td><td>4.45</td></tr>
+            <tr><td>PMD Flexx2</td><td>6.97</td><td>6.98</td><td>4.68</td></tr>
+            <tr><td>Stereolabs ZED 2i</td><td>1.58</td><td>1.60</td><td>5.99</td></tr>
+            <tr class="best"><td>Zivid 2M+ 60</td><td><strong>1.20</strong></td><td><strong>1.42</strong></td><td><strong>2.21</strong></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section>
+      <h2>Setup</h2>
+      <p>
+        We evaluate four sensing principles on a porcine bone specimen, a porcine belly specimen, and a silicone phantom. Reference geometry is acquired with an OptiTrack-tracked stylus. Each sensor captures three point clouds per object, which are registered to the reference using calibration cubes and rigid coherent point drift.
+      </p>
+      <figure>
+        <img src="assets/evaluated-objects.png" alt="Porcine bone, porcine belly, and silicone kidney phantom used in the evaluation." width="2243" height="1697" loading="lazy">
+        <figcaption>Evaluated objects: porcine bone, porcine belly, and silicone kidney phantom.</figcaption>
+      </figure>
+    </section>
+
+<section id="data">
+  <h2>Data</h2>
+  <p>
+    The evaluation data contains the stylus-sampled reference point clouds and three aligned captures per camera and object. It covers the bone, porcine belly, and phantom scenes, including the additional D405 close-up condition.
+  </p>
+  <p>
+    <a href="https://github.com/somefoo/schweinebauch">
+      View and download the dataset on GitHub
+    </a>
+  </p>
+</section>
+
+    <section>
+      <h2>BibTeX</h2>
+      <pre><code>@article{henrich2026depth,
+  title   = {Comparing Commercial Depth Sensor Accuracy
+             for Medical Applications},
+  author  = {Henrich, Pit and Weiherer, Maximilian and
+             Hansen, Franziska and Egger, Bernhard and
+             Mathis-Ullrich, Franziska},
+  journal = {arXiv preprint arXiv:2606.13028},
+  year    = {2026}
+}</code></pre>
+    </section>
+  </main>
+
+  <footer>
+    <p>Supported by the Bayerische Forschungsstiftung under Grant AZ-1592-23-ForNeRo.</p>
+  </footer>
+</body>
+</html>
